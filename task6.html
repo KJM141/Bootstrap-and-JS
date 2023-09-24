@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container{
+            background-color: lightgrey;
+        }
+        .error {
+            border: 2px solid red;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .caution-symbol {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            color: red;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <form id="myForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name">
+                <span class="caution-symbol">&#x26A0</span>
+                <div class="error-message" id="name-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email">
+                <span class="caution-symbol">&#x26A0</span>
+                <div class="error-message" id="email-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password">
+                <span class="caution-symbol">&#9888</span>
+                <div class="error-message" id="password-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="hobbies">Hobbies</label>
+                <select class="form-control" id="hobbies" name="hobbies">
+                    <option value="">Select a hobby</option>
+                    <option value="reading">Reading</option>
+                    <option value="cooking">Cooking</option>
+                    <option value="gaming">Gaming</option>
+                    <option value="traveling">Traveling</option>
+                </select>
+                <div class="error-message" id="hobbies-error"></div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger" id="submitBtn">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function(event) {
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const password = document.getElementById("password");
+            const hobbies = document.getElementById("hobbies");
+
+            if (name.value.trim() === "") {
+                name.classList.add("error");
+                document.getElementById("name-error").textContent = "Name is required";
+                event.preventDefault();
+            } else {
+                name.classList.remove("error");
+                document.getElementById("name-error").textContent = "";
+            }
+
+            if (email.value.trim() === "") {
+                email.classList.add("error");
+                document.getElementById("email-error").textContent = "Email is required";
+                event.preventDefault();
+            } else {
+                email.classList.remove("error");
+                document.getElementById("email-error").textContent = "";
+            }
+
+            if (password.value.trim() === "") {
+                password.classList.add("error");
+                document.getElementById("password-error").textContent = "Password is required";
+                event.preventDefault();
+            } else {
+                password.classList.remove("error");
+                document.getElementById("password-error").textContent = "";
+            }
+
+            if (hobbies.value === "") {
+                hobbies.classList.add("error");
+                document.getElementById("hobbies-error").textContent = "Hobbies are required";
+                event.preventDefault();
+            } else {
+                hobbies.classList.remove("error");
+                document.getElementById("hobbies-error").textContent = "";
+            }
+        });
+
+        // Set the width of the submit button to be as wide as the div containing it
+        const submitBtn = document.getElementById("submitBtn");
+        const formGroup = document.querySelector(".form-group");
+        const formWidth = formGroup.clientWidth;
+        submitBtn.style.width = formWidth + "px";
+    </script>
+</body>
+</html>
